@@ -1,14 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WariorMove : MonoBehaviour
 {
-    // Start is called before the first frame update
     static Animator anim;
     public float Speed;
     public Transform ilkkatsol, ilkkatsag, ikikatsol, ikikatsag, uckatsol,uckatsag,dortsol,dortsag;
     bool crouch;
+
+    [SerializeField] Transform firePoint;
+    [SerializeField] Transform firePointUp;
+    [SerializeField] Transform firePointDown;
+
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -20,14 +26,18 @@ public class WariorMove : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             crouch = true;
+            
         }
         if (Input.GetKey(KeyCode.W))
         {
             crouch = false;
+            
         }
         if (crouch)
         {
             Speed = 5;
+
+            firePoint.position = new Vector3(firePointDown.position.x, firePointDown.position.y, firePointDown.position.z);
 
             if (Input.GetKey(KeyCode.D))
             {
@@ -58,6 +68,7 @@ public class WariorMove : MonoBehaviour
             else
             {
             Speed = 7;
+            firePoint.position = new Vector3(firePointUp.position.x, firePointUp.position.y, firePointUp.position.z);
             if (Input.GetKey(KeyCode.D))
                 {
                     anim.SetBool("Walk", true);
@@ -119,6 +130,8 @@ public class WariorMove : MonoBehaviour
             gameObject.transform.position = uckatsol.transform.position;
         }
     }
+
+    
 
 
 }

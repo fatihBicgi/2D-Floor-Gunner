@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class Shoot : MonoBehaviour
     bool isShootAvailable = true;
     float shootTimer = 0;
     [SerializeField] float delaySpeed = 0.1f;
+
+    
 
 
     void FixedUpdate()
