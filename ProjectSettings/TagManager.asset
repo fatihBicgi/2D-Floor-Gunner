@@ -12,6 +12,7 @@ TagManager:
   - secondright
   - thirtright
   - fourthright
+  - Enemy
   layers:
   - Default
   - TransparentFX

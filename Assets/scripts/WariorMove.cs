@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class WariorMove : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -95,8 +97,9 @@ public class WariorMove : MonoBehaviour
             }
             }       
     }
+
     void OnTriggerEnter2D(Collider2D other)
-    {      
+    {
         if (other.tag == "firstleft")
         {
             gameObject.transform.position = ikikatsag.transform.position;
@@ -131,7 +134,7 @@ public class WariorMove : MonoBehaviour
         }
     }
 
-    
+
 
 
 }

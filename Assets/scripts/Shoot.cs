@@ -13,9 +13,6 @@ public class Shoot : MonoBehaviour
     float shootTimer = 0;
     [SerializeField] float delaySpeed = 0.1f;
 
-    
-
-
     void FixedUpdate()
     {
         if (Input.GetButton("Fire1") && isShootAvailable)
