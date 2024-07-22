@@ -11,7 +11,7 @@ public class Shoot : MonoBehaviour
 
     bool isShootAvailable = true;
     float shootTimer = 0;
-    [SerializeField] float delaySpeed = 0.1f;
+    public float delaySpeed;
 
     void FixedUpdate()
     {

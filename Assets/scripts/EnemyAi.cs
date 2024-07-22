@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAi : MonoBehaviour
@@ -19,39 +21,26 @@ public class EnemyAi : MonoBehaviour
     public int attack1Damage = 1;
     public float timeBetweenAttacks;
 
+    public bool isPlayerVisible=true;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
-    {     
-            MoveToPlayer();       
-    }
-
-    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (isPlayerVisible)
         {
-            isPlayerInTerritory = true;
+            MoveToPlayer();
         }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        print(collision.gameObject.tag);
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            isPlayerInTerritory = false;
-        }
+                  
     }
     public void MoveToPlayer()
     {
         transform.LookAt(target.position);
         transform.Rotate(new Vector2(0, -90), Space.Self);
+        
 
         if (Vector2.Distance(transform.position, target.position) > attack1Range)
         {
@@ -61,8 +50,8 @@ public class EnemyAi : MonoBehaviour
         {                  
                 Debug.Log("You Lose");
                 Time.timeScale = 0;
-                retry.GetComponent<Image>().enabled = true;
-                retry.GetComponentInChildren<Text>().enabled = true;            
+                retry.GetComponent<UnityEngine.UI.Image>().enabled = true;
+                retry.GetComponentInChildren<TextMeshPro>().enabled = true;     
         }
     }
 }

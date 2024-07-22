@@ -8,7 +8,7 @@ public class GameOver : MonoBehaviour
 {
     public void RetryFunction()
     {
-        Time.timeScale = 1;
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }

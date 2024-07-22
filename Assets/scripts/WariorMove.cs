@@ -7,7 +7,8 @@ using UnityEngine;
 public class WariorMove : MonoBehaviour
 {
     static Animator anim;
-    public float Speed;
+    float Speed;
+    public float defaultSpeed;
     public Transform ilkkatsol, ilkkatsag, ikikatsol, ikikatsag, uckatsol,uckatsag,dortsol,dortsag;
     bool crouch;
 
@@ -15,13 +16,23 @@ public class WariorMove : MonoBehaviour
     [SerializeField] Transform firePointUp;
     [SerializeField] Transform firePointDown;
 
+    SpriteRenderer spriteRenderer;
+
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         Time.timeScale = 1;
+
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();    
+
     }
 
+    public void BeInvisible()
+    {
+        spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
+    }
+   
     // Update is called once per frame
     void Update()
     {
@@ -37,7 +48,7 @@ public class WariorMove : MonoBehaviour
         }
         if (crouch)
         {
-            Speed = 5;
+            Speed = defaultSpeed - 2;
 
             firePoint.position = new Vector3(firePointDown.position.x, firePointDown.position.y, firePointDown.position.z);
 
@@ -69,7 +80,7 @@ public class WariorMove : MonoBehaviour
         }
             else
             {
-            Speed = 7;
+            Speed = defaultSpeed;
             firePoint.position = new Vector3(firePointUp.position.x, firePointUp.position.y, firePointUp.position.z);
             if (Input.GetKey(KeyCode.D))
                 {
