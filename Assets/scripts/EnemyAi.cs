@@ -23,9 +23,16 @@ public class EnemyAi : MonoBehaviour
 
     public bool isPlayerVisible=true;
 
+    [SerializeField] float health, maxHealth = 3f;
+
+    [SerializeField] FloatingHealthBar healthBar;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
+
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
     void Update()
@@ -52,6 +59,18 @@ public class EnemyAi : MonoBehaviour
                 Time.timeScale = 0;
                 retry.GetComponent<UnityEngine.UI.Image>().enabled = true;
                 retry.GetComponentInChildren<TextMeshPro>().enabled = true;     
+        }
+    }
+
+    public void TakeDamege(float damageAmount)
+    {
+        health -= damageAmount;
+
+        healthBar.UpdateHealthBar(health, maxHealth);
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    //[SerializeField] GameObject hitEffect;
+    [SerializeField] GameObject hitEffect;
+
+    [SerializeField] EnemyAi enemyAi;
+
+    [SerializeField] float damageAmount = 1;
 
     void Start()
     {
@@ -21,6 +25,12 @@ public class Bullet : MonoBehaviour
     {
         if( collision.transform.tag == "Enemy")
         {
+            enemyAi= collision.gameObject.GetComponent<EnemyAi>();      
+            
+            enemyAi.TakeDamege(damageAmount);
+
+            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            Destroy(effect, .3f);
             DestroySelf();
 
         }
