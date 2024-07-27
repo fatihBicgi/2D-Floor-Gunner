@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7597235813350385204}
   - component: {fileID: 1077271271300119773}
   - component: {fileID: 7138132818193200681}
-  - component: {fileID: 2050990443086395127}
+  - component: {fileID: 1784096680331254183}
   m_Layer: 0
   m_Name: shoot fast
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.46, y: -1.37, z: 0}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 3}
   m_EdgeRadius: 0
---- !u!114 &2050990443086395127
+--- !u!114 &1784096680331254183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3326228970466839315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab7cb053bf7bba41849825f1b823a67, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f4ad38462626834eb2ac8fa66ba108c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  player: {fileID: 0}

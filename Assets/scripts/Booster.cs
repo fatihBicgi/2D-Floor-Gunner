@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootFast : MonoBehaviour
+public class Booster : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField]
     GameObject player;
 
     Shoot shoot;
 
+    public static event Action BoosterCollected;
 
     private void Start()
     {
@@ -24,14 +24,8 @@ public class ShootFast : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             shoot.BoosterGameObject = this.gameObject;
-            shoot.delaySpeed = shoot.FastDelaySpeed;
-            StartCoroutine(ExampleCoroutine());
+            BoosterCollected?.Invoke();
 
         }
-    }
-    IEnumerator ExampleCoroutine()
-    {    
-        yield return new WaitForSeconds(10);      
-        shoot.delaySpeed = shoot.defaultDelaySpeed;
     }
 }
