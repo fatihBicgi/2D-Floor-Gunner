@@ -74,19 +74,21 @@ public class WariorMove : MonoBehaviour
                 anim.SetBool("Walk", false);
                 anim.SetBool("Crouch", false);
                 anim.SetBool("Crouchidle", true);
-            }
-       
+            }      
     
         }
             else
             {
             Speed = defaultSpeed;
             firePoint.position = new Vector3(firePointUp.position.x, firePointUp.position.y, firePointUp.position.z);
+            
             if (Input.GetKey(KeyCode.D))
                 {
-                    anim.SetBool("Walk", true);
-                    anim.SetBool("Crouch", false);
-                    anim.SetBool("Crouchidle", false);
+                    
+                anim.SetBool("Walk", true);                   
+                anim.SetBool("Crouch", false);    
+                anim.SetBool("Crouchidle", false);
+               
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                     transform.Translate(Vector2.right * Speed * Time.deltaTime);
 

@@ -7,6 +7,7 @@ public class FloatingHealthBar : MonoBehaviour
 {
     [SerializeField] Slider slider;
     [SerializeField] GameObject fillGameObject;
+
     Image image;
 
     [SerializeField] Gradient _healthBarGradient;

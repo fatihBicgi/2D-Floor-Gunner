@@ -9,12 +9,6 @@ public class Shoot : MonoBehaviour
     [SerializeField] GameObject bulletPref;
     [SerializeField] float bulletForce;
 
-    public GameObject BoosterGameObject;
-
-    BoxCollider2D collider2D;
-    SpriteRenderer spriteRenderer;
-
-    WariorMove wariorMove;
 
     bool isShootAvailable = true;
     float shootTimer = 0;
@@ -27,12 +21,7 @@ public class Shoot : MonoBehaviour
     private void Start()
     {
 
-        wariorMove = gameObject.GetComponent<WariorMove>();
-
         delaySpeed = defaultDelaySpeed;
-
-        Booster.BoosterCollected += DoBoosterThings;
-
 
     }
     void FixedUpdate()
@@ -62,45 +51,6 @@ public class Shoot : MonoBehaviour
         GameObject bullet = Instantiate(bulletPref, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
-    }
-
-
-    void DoBoosterThings()
-    {
-        collider2D = BoosterGameObject.GetComponent<BoxCollider2D>();
-        spriteRenderer = BoosterGameObject.GetComponent<SpriteRenderer>();
-
-        collider2D.enabled = false;
-        spriteRenderer.enabled = false;
-
-        if (BoosterGameObject.tag == "ShootBooster")
-        {
-            delaySpeed = FastDelaySpeed;
-            StartCoroutine(BackToDefaultShoots());
-            
-        }
-        if (BoosterGameObject.tag == "SpeedBooster")
-        {
-            wariorMove.defaultSpeed = 8;
-
-            StartCoroutine(BackToDefaultSpeed());
-            
-        }               
-
-    }
-    IEnumerator BackToDefaultShoots()
-    {
-        yield return new WaitForSeconds(5);
-
-        delaySpeed = defaultDelaySpeed;
-
-    }
-    IEnumerator BackToDefaultSpeed()
-    {
-        yield return new WaitForSeconds(5);
-
-        wariorMove.defaultSpeed = 6;
-
-    }
+    }   
 
 }

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAi : MonoBehaviour
@@ -23,7 +24,10 @@ public class EnemyAi : MonoBehaviour
 
     public bool isPlayerVisible=true;
 
-    [SerializeField] float health, maxHealth = 3f;
+    [SerializeField]
+    float 
+        health = 100f, 
+        maxHealth = 100f;
 
     [SerializeField] FloatingHealthBar healthBar;
 
@@ -39,27 +43,41 @@ public class EnemyAi : MonoBehaviour
     {
         if (isPlayerVisible)
         {
-            MoveToPlayer();
+            EnemyMove();
         }
+
                   
     }
-    public void MoveToPlayer()
+    public void EnemyMove()
+    {
+       
+        if (Vector2.Distance(transform.position, target.position) > attack1Range)
+        {
+            MoveToPlayer();
+
+        }
+        else if (Vector2.Distance(transform.position, target.position) <= attack1Range)
+        {
+            GameOver();
+        }
+    }
+
+    private void MoveToPlayer()
     {
         transform.LookAt(target.position);
         transform.Rotate(new Vector2(0, -90), Space.Self);
-        
+        transform.Translate(new Vector2(speed * Time.deltaTime, 0));
+    }
 
-        if (Vector2.Distance(transform.position, target.position) > attack1Range)
-        {
-            transform.Translate(new Vector2(speed * Time.deltaTime, 0));
-        }
-        else if (Vector2.Distance(transform.position, target.position) <= attack1Range)
-        {                  
-                Debug.Log("You Lose");
-                Time.timeScale = 0;
-                retry.GetComponent<UnityEngine.UI.Image>().enabled = true;
-                retry.GetComponentInChildren<TextMeshPro>().enabled = true;     
-        }
+    private void GameOver()
+    {
+        Debug.Log("You Lose");
+
+        Time.timeScale = 0;
+
+        retry.GetComponent<UnityEngine.UI.Image>().enabled = true;
+
+        retry.GetComponentInChildren<TextMeshPro>().enabled = true;
     }
 
     public void TakeDamege(float damageAmount)
