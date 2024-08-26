@@ -22,7 +22,8 @@ public class EnemyAi : MonoBehaviour
     public int attack1Damage = 1;
     public float timeBetweenAttacks;
 
-    private bool isPlayerVisible = true;
+    SuperPower superPower;
+    [SerializeField] GameObject superPowerObject;
 
     [SerializeField]
     float 
@@ -37,17 +38,24 @@ public class EnemyAi : MonoBehaviour
         healthBar = GetComponentInChildren<FloatingHealthBar>();
 
         healthBar.UpdateHealthBar(health, maxHealth);
+
+        superPower = superPowerObject.GetComponent<SuperPower>();
     }
 
     void Update()
     {
-        if (isPlayerVisible)
+        if (PlayerIsVisible())
         {
             EnemyMove();
         }
 
-                  
     }
+
+    private bool PlayerIsVisible()
+    {
+        return !(superPower.isPlayerInvisibleNow);
+    }
+
     public void EnemyMove()
     {
        
