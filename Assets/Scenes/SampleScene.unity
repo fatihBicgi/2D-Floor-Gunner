@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &29753575
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -302,7 +302,6 @@ MonoBehaviour:
   attack1Range: 1
   attack1Damage: 1
   timeBetweenAttacks: 1
-  isPlayerVisible: 1
   health: 100
   maxHealth: 100
   healthBar: {fileID: 2083006382}
@@ -1045,6 +1044,7 @@ GameObject:
   - component: {fileID: 501107628}
   - component: {fileID: 501107629}
   - component: {fileID: 501107630}
+  - component: {fileID: 501107631}
   m_Layer: 5
   m_Name: Teleport
   m_TagString: Untagged
@@ -1137,9 +1137,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 501107629}
-  timerValue: 0
+  timerValue: 8
   currentValue: 0
   maxValue: 10
+--- !u!114 &501107631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501107627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e725ba33addf69546807c46c83b45291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1104180358}
+  isPlayerInvisibleNow: 0
+  isPlayerTeleported: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,7 +1280,7 @@ RectTransform:
   m_Father: {fileID: 465584276}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.551, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2092,7 +2107,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 01409fa070c235d4fad9a92ccb17c096, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8792453, g: 0.29031673, b: 0.29031673, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2144,6 +2159,8 @@ MonoBehaviour:
   firePoint: {fileID: 2134080822}
   firePointUp: {fileID: 2075340116}
   firePointDown: {fileID: 1519274542}
+  inVisibleSuperpowerObject: {fileID: 1828494049}
+  TeleportSuperpowerObject: {fileID: 501107627}
 --- !u!61 &1104180363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3060,6 +3077,7 @@ GameObject:
   - component: {fileID: 1828494050}
   - component: {fileID: 1828494051}
   - component: {fileID: 1828494052}
+  - component: {fileID: 1828494053}
   m_Layer: 5
   m_Name: Invisible
   m_TagString: Untagged
@@ -3152,9 +3170,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1828494051}
-  timerValue: 0
+  timerValue: 8
   currentValue: 0
   maxValue: 10
+--- !u!114 &1828494053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828494049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e725ba33addf69546807c46c83b45291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1104180358}
+  isPlayerInvisibleNow: 0
+  isPlayerTeleported: 0
 --- !u!1 &1920314792
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,6 +3754,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1104180358}
+    - target: {fileID: 5479394790726871958, guid: 60c711d57cc3a2c41ba27c7370e9f810,
+        type: 3}
+      propertyPath: useTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479394790726871958, guid: 60c711d57cc3a2c41ba27c7370e9f810,
+        type: 3}
+      propertyPath: boosterSpawnerObject
+      value: 
+      objectReference: {fileID: 138836659}
     - target: {fileID: 6223076803101099310, guid: 60c711d57cc3a2c41ba27c7370e9f810,
         type: 3}
       propertyPath: m_Name
@@ -3749,6 +3792,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1104180358}
+    - target: {fileID: 1784096680331254183, guid: 987fd5cb265ac9b499321ac09323e395,
+        type: 3}
+      propertyPath: useTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784096680331254183, guid: 987fd5cb265ac9b499321ac09323e395,
+        type: 3}
+      propertyPath: boosterSpawnerObject
+      value: 
+      objectReference: {fileID: 138836659}
     - target: {fileID: 3326228970466839315, guid: 987fd5cb265ac9b499321ac09323e395,
         type: 3}
       propertyPath: m_Name

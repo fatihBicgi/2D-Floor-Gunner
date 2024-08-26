@@ -8,7 +8,8 @@ public class FloatingTimeBar : MonoBehaviour
     [SerializeField] Slider slider;
 
     private bool isTimerWorking = true;
-    private bool isSuperpowerAvailable = false;
+
+    SuperPower superPower;
 
     [SerializeField]
     float
@@ -16,17 +17,32 @@ public class FloatingTimeBar : MonoBehaviour
         currentValue = 0f,
         maxValue = 10;
 
-    private void Update()
+    private void Start()
     {
+        superPower = gameObject.GetComponent<SuperPower>();
+    }
 
+    private void FixedUpdate()
+    {
         //bu ciktiyi kontrol etmek isteyen kiþi isSuperpowerAvailable in degerini cekecek ve kullanacak,
         //gucu kullanýnca da isSuperpowerAvailable u false yapacak
 
-        if (isSuperpowerAvailable == false)
+        if (superPower.GetisSuperpowerAvailable() == false)
         {
             TimerWork();
         }
-        
+                  
+        if (superPower.isPlayerInvisibleNow)           
+        {
+            isTimerWorking = true;
+        }
+
+        if (superPower.isPlayerTeleported) 
+        {
+            isTimerWorking = true;
+            superPower.SetisTeleportedFalse();
+
+        }
     }
 
     private void TimerWork()
@@ -45,7 +61,7 @@ public class FloatingTimeBar : MonoBehaviour
                 timerValue = 0;
                 isTimerWorking = false;
 
-                isSuperpowerAvailable = true;
+                superPower.SetisSuperpowerAvailableTrue();
             }
         }
     }
@@ -55,17 +71,6 @@ public class FloatingTimeBar : MonoBehaviour
         currentValue = timerValue;
         slider.value = currentValue / maxValue;
     }
-
-    // getter setter
-    public bool GetisSuperpowerAvailable()
-    {
-        return isSuperpowerAvailable;
-    }
-    public void SetisSuperpowerAvailableFalse()
-    {
-        isSuperpowerAvailable = false;
-    }
-
 
 
 }

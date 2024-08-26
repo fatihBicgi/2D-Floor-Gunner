@@ -18,33 +18,54 @@ public class WariorMove : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
+    private bool isInvisibleNow = false;
+    private bool isTeleported = false;
+
+    SuperPower inVisibleSuperpower, TeleportSuperpower;
+
+    [SerializeField] GameObject inVisibleSuperpowerObject, TeleportSuperpowerObject;
+
+    //[SerializeField] 
+    private int InVisibleTimeLength = 5;
+
 
     private void Start()
     {
+
         anim = GetComponent<Animator>();
         Time.timeScale = 1;
 
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();    
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        inVisibleSuperpower = inVisibleSuperpowerObject.GetComponent<SuperPower>();
+
+        TeleportSuperpower = TeleportSuperpowerObject.GetComponent<SuperPower>();
 
     }
 
-    public void BeInvisible()
-    {
-        spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
-    }
-   
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.E) && InVisibleSuperpowerAvailable())
+        {
+            BeInvisible();
+            StartCoroutine(InVisibleTimer());
+        }
+
+        if (Input.GetKey(KeyCode.R) && TeleportSuperpower.GetisSuperpowerAvailable())
+        {
+            TeleportProcess();
+        }
+
         if (Input.GetKey(KeyCode.S))
         {
             crouch = true;
-            
+
         }
         if (Input.GetKey(KeyCode.W))
         {
             crouch = false;
-            
+
         }
         if (crouch)
         {
@@ -74,42 +95,50 @@ public class WariorMove : MonoBehaviour
                 anim.SetBool("Walk", false);
                 anim.SetBool("Crouch", false);
                 anim.SetBool("Crouchidle", true);
-            }      
-    
+            }
+
         }
-            else
-            {
+        else
+        {
             Speed = defaultSpeed;
             firePoint.position = new Vector3(firePointUp.position.x, firePointUp.position.y, firePointUp.position.z);
-            
+
             if (Input.GetKey(KeyCode.D))
-                {
-                    
-                anim.SetBool("Walk", true);                   
-                anim.SetBool("Crouch", false);    
+            {
+
+                anim.SetBool("Walk", true);
+                anim.SetBool("Crouch", false);
                 anim.SetBool("Crouchidle", false);
-               
+
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                    transform.Translate(Vector2.right * Speed * Time.deltaTime);
+                transform.Translate(Vector2.right * Speed * Time.deltaTime);
 
-                }
-                else if (Input.GetKey(KeyCode.A))
-                {
-                    anim.SetBool("Walk", true);
-                    anim.SetBool("Crouch", false);
-                    anim.SetBool("Crouchidle", false);
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                    transform.Translate(Vector2.right * Speed * Time.deltaTime);
-
-                }
-                else
-                {
-                    anim.SetBool("Walk", false);
-                    anim.SetBool("Crouch", false);
-                    anim.SetBool("Crouchidle", false);
             }
-            }       
+            else if (Input.GetKey(KeyCode.A))
+            {
+                anim.SetBool("Walk", true);
+                anim.SetBool("Crouch", false);
+                anim.SetBool("Crouchidle", false);
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                transform.Translate(Vector2.right * Speed * Time.deltaTime);
+
+            }
+            else
+            {
+                anim.SetBool("Walk", false);
+                anim.SetBool("Crouch", false);
+                anim.SetBool("Crouchidle", false);
+            }
+        }
     }
+
+    private void TeleportProcess()
+    {
+        gameObject.transform.position = dortsol.transform.position;
+        TeleportSuperpower.SetisSuperpowerAvailableFalse();
+        isTeleported = true;
+    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -145,6 +174,42 @@ public class WariorMove : MonoBehaviour
         {
             gameObject.transform.position = uckatsol.transform.position;
         }
+    }
+
+    IEnumerator InVisibleTimer()
+    {
+        yield return new WaitForSeconds(InVisibleTimeLength);
+        isInvisibleNow = false;
+        spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+
+    }
+    private void BeInvisible()
+    {
+        spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
+        isInvisibleNow = true;
+        inVisibleSuperpower.SetisSuperpowerAvailableFalse();
+    }
+
+    public bool GetisInvisibleNow()
+    {
+        return isInvisibleNow;
+    }
+
+    public bool GetisTeleported()
+    {
+        return isTeleported;
+    }
+
+    public void SetisTeleportedFalse()
+    {
+        isTeleported = false;
+    }
+
+
+
+    private bool InVisibleSuperpowerAvailable()
+    {
+        return inVisibleSuperpower.GetisSuperpowerAvailable() == true;
     }
 
 

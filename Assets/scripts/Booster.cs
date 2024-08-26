@@ -13,8 +13,14 @@ public class Booster : MonoBehaviour
 
     WariorMove wariorMove;
 
+    BoosterSpawner boosterSpawner;
+    [SerializeField] GameObject boosterSpawnerObject;
+
     public BoxCollider2D boxCollider2D;
     public SpriteRenderer spriteRenderer;
+
+    [SerializeField] 
+    private int useTime = 5;
 
     private void Awake()
     {
@@ -27,7 +33,12 @@ public class Booster : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         StartCoroutine(TimeDoneForUse());
+
+        boosterSpawner = boosterSpawnerObject.GetComponent<BoosterSpawner>();
+
+        useTime = HalfOfSpawnSpeed();
     }
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -56,7 +67,7 @@ public class Booster : MonoBehaviour
  
     IEnumerator TimeDoneForUse()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(useTime);
 
         DestroySelf();
 
@@ -77,16 +88,19 @@ public class Booster : MonoBehaviour
         wariorMove.defaultSpeed = 6;
 
         DestroySelf();
-
     }
     
-
     private void DestroySelf()
     {
 
         Destroy(gameObject);
     }
 
-    
+    private int HalfOfSpawnSpeed()
+    {
+        return (boosterSpawner.GetdelaySpeed() / 2);
+    }
+
+
 }
 

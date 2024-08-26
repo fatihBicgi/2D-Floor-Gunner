@@ -22,7 +22,7 @@ public class EnemyAi : MonoBehaviour
     public int attack1Damage = 1;
     public float timeBetweenAttacks;
 
-    public bool isPlayerVisible=true;
+    private bool isPlayerVisible = true;
 
     [SerializeField]
     float 
