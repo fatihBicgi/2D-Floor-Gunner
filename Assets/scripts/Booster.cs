@@ -20,7 +20,7 @@ public class Booster : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     [SerializeField] 
-    private int useTime = 5;
+    private int useTime = 10;
 
     private void Awake()
     {
@@ -34,9 +34,7 @@ public class Booster : MonoBehaviour
 
         StartCoroutine(TimeDoneForUse());
 
-        boosterSpawner = boosterSpawnerObject.GetComponent<BoosterSpawner>();
-
-        useTime = HalfOfSpawnSpeed();
+        //boosterSpawner = boosterSpawnerObject.GetComponent<BoosterSpawner>();
     }
     
 
@@ -74,7 +72,7 @@ public class Booster : MonoBehaviour
     }
     IEnumerator BackToDefaultShoots()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
 
         shoot.delaySpeed = shoot.defaultDelaySpeed;
 
@@ -96,10 +94,6 @@ public class Booster : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private int HalfOfSpawnSpeed()
-    {
-        return (boosterSpawner.GetdelaySpeed() / 2);
-    }
 
 
 }

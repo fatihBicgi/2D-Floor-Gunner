@@ -7,10 +7,10 @@ public class BoosterSpawner : MonoBehaviour
 {
     [SerializeField]
     GameObject BoosterPrefab;
- 
-    private int delaySpeed = 10;
 
-    private bool isAvailable = true;
+    [SerializeField] 
+    private int delaySpeed = 20;
+
         
     void Start()
     {

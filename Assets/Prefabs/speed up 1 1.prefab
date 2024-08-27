@@ -144,3 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  boosterSpawnerObject: {fileID: 0}
+  boxCollider2D: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  useTime: 10

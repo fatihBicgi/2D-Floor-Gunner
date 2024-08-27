@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1077271271300119773}
   - component: {fileID: 7138132818193200681}
   - component: {fileID: 1784096680331254183}
+  - component: {fileID: 7175354788054407599}
   m_Layer: 0
   m_Name: shoot fast
   m_TagString: ShootBooster
@@ -144,4 +145,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  thisGameObject: {fileID: 0}
+  boosterSpawnerObject: {fileID: 0}
+  boxCollider2D: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  useTime: 12
+--- !u!111 &7175354788054407599
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326228970466839315}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 46115f4dc0c02e54a9a842e24fc54f7c, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 46115f4dc0c02e54a9a842e24fc54f7c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.XR;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAi : MonoBehaviour
@@ -16,8 +19,8 @@ public class EnemyAi : MonoBehaviour
     GameObject player;
     public bool isPlayerInTerritory;
 
-    public Transform target;
-    public float speed = 3f;
+    public GameObject target;
+    public float speed = 2f , boostedSpeed = 5f;
     public float attack1Range = 1f;
     public int attack1Damage = 1;
     public float timeBetweenAttacks;
@@ -32,21 +35,41 @@ public class EnemyAi : MonoBehaviour
 
     [SerializeField] FloatingHealthBar healthBar;
 
+    SpriteRenderer spriteRenderer;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        superPowerObject = GameObject.Find("Invisible");
+        target = GameObject.Find("GunnerPix1");
+        retry = GameObject.Find("Retry");
+
+
         healthBar = GetComponentInChildren<FloatingHealthBar>();
 
         healthBar.UpdateHealthBar(health, maxHealth);
 
         superPower = superPowerObject.GetComponent<SuperPower>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        //health = maxHealth;
     }
+
 
     void Update()
     {
         if (PlayerIsVisible())
         {
-            EnemyMove();
+            EnemyMove();                          
+
+            if (health < (maxHealth / 2))
+
+            {
+                ChangeSpriteColor();
+                speed = boostedSpeed;
+                              
+            }
         }
 
     }
@@ -59,12 +82,12 @@ public class EnemyAi : MonoBehaviour
     public void EnemyMove()
     {
        
-        if (Vector2.Distance(transform.position, target.position) > attack1Range)
+        if (Vector2.Distance(transform.position, target.transform.position) > attack1Range)
         {
             MoveToPlayer();
 
         }
-        else if (Vector2.Distance(transform.position, target.position) <= attack1Range)
+        else if (Vector2.Distance(transform.position, target.transform.position) <= attack1Range)
         {
             GameOver();
         }
@@ -72,7 +95,7 @@ public class EnemyAi : MonoBehaviour
 
     private void MoveToPlayer()
     {
-        transform.LookAt(target.position);
+        transform.LookAt(target.transform.position);
         transform.Rotate(new Vector2(0, -90), Space.Self);
         transform.Translate(new Vector2(speed * Time.deltaTime, 0));
     }
@@ -98,6 +121,11 @@ public class EnemyAi : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void ChangeSpriteColor()
+    {
+        spriteRenderer.color = new Color(0, 1, 0, 1); // green
     }
 }
 

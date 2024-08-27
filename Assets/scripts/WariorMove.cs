@@ -178,14 +178,20 @@ public class WariorMove : MonoBehaviour
 
     IEnumerator InVisibleTimer()
     {
+
+        if (isInvisibleNow == false)
+        {
+            yield break;
+        }           
+            
         yield return new WaitForSeconds(InVisibleTimeLength);
         isInvisibleNow = false;
-        spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+        spriteRenderer.color = new Color(1f, 1f, 1f, 1f);    // visible sprite 
 
     }
     private void BeInvisible()
     {
-        spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
+        spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f); // invisible sprite 
         isInvisibleNow = true;
         inVisibleSuperpower.SetisSuperpowerAvailableFalse();
     }
@@ -193,6 +199,10 @@ public class WariorMove : MonoBehaviour
     public bool GetisInvisibleNow()
     {
         return isInvisibleNow;
+    }
+    public void SetisInvisibleNowFalse()
+    {
+        isInvisibleNow = false;
     }
 
     public bool GetisTeleported()

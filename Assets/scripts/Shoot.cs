@@ -18,10 +18,13 @@ public class Shoot : MonoBehaviour
 
     public float delaySpeed;
 
+    WariorMove WariorMove;
+
     private void Start()
     {
-
         delaySpeed = defaultDelaySpeed;
+
+        WariorMove = gameObject.GetComponent<WariorMove>();
 
     }
     void FixedUpdate()
@@ -51,6 +54,8 @@ public class Shoot : MonoBehaviour
         GameObject bullet = Instantiate(bulletPref, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+
+        WariorMove.SetisInvisibleNowFalse();
     }   
 
 }
