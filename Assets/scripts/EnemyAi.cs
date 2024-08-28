@@ -1,14 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.U2D;
-using UnityEngine.UI;
 using UnityEngine.UIElements;
-using UnityEngine.XR;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAi : MonoBehaviour
 {
