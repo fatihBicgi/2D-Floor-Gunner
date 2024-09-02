@@ -9,6 +9,8 @@ public class GameOver : MonoBehaviour
     public void RetryFunction()
     {
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+
     }
 }

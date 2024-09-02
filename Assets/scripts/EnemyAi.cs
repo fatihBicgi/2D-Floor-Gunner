@@ -14,6 +14,8 @@ public class EnemyAi : MonoBehaviour
     GameObject player;
     public bool isPlayerInTerritory;
 
+    bool isEnemyDead = false;
+
     public GameObject target;
     public float speed = 2f , boostedSpeed = 5f;
     public float attack1Range = 1f;
@@ -58,14 +60,14 @@ public class EnemyAi : MonoBehaviour
         {
             EnemyMove();                          
 
-            if (health < (maxHealth / 2))
-
+            if (health < (maxHealth / 2) && health > 0 )
             {
                 ChangeSpriteColor();
                 speed = boostedSpeed;
                               
             }
-        }
+        }       
+
 
     }
 
@@ -114,13 +116,29 @@ public class EnemyAi : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            health = 0;
+            isEnemyDead = true;
+            StartCoroutine(WaitForDead());
+            
         }
     }
 
     public void ChangeSpriteColor()
     {
         spriteRenderer.color = new Color(0, 1, 0, 1); // green
+    }
+
+    public bool GetIsEnemyDead()
+    {
+        return isEnemyDead;
+    }
+
+    IEnumerator WaitForDead()
+    {
+        yield return new WaitForSeconds(0.2f);
+        gameObject.SetActive(false);
+
+
     }
 }
 

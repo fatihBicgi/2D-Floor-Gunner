@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CopyEnemyAi : EnemyAi
 {
+    [SerializeField] int destroyTime = 6;
+
     void Awake()
     {
-        Destroy(gameObject,6);
+        Destroy(gameObject, destroyTime);
     }
   
 }
