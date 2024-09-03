@@ -46,13 +46,13 @@ public class WariorMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.E) && InVisibleSuperpowerAvailable())
+        if (Input.GetKeyDown(KeyCode.LeftShift) && InVisibleSuperpowerAvailable())
         {
             BeInvisible();
             StartCoroutine(InVisibleTimer());
         }
 
-        if (Input.GetKey(KeyCode.R) && TeleportSuperpower.GetisSuperpowerAvailable())
+        if (Input.GetKey("space") && TeleportSuperpower.GetisSuperpowerAvailable())
         {
             TeleportProcess();
         }
